@@ -14,7 +14,7 @@ try:
 except:
     raise Exception("*** Must first set CLAW enviornment variable")
 
-bouss = False                # Dispersive terms ?
+bouss = True                # Dispersive terms ?
 B_param = 0.0 / 15.0        # Parameter for the Boussinesq eqns
 use_bous_sw_thresh = False  # Use the switching threshold
 bous_sw_thresh = .8         # Threshold for the transition to SWE
@@ -123,7 +123,7 @@ def setrun(claw_pkg='geoclaw'):
     # Note that the time integration stops after the final output time.
     # The solution at initial time t0 is always written in addition.
 
-    clawdata.output_style = 2
+    clawdata.output_style = 1
 
     if clawdata.output_style==1:
         # Output nout frames at equally spaced times up to tfinal:
@@ -157,7 +157,7 @@ def setrun(claw_pkg='geoclaw'):
     # The current t, dt, and cfl will be printed every time step
     # at AMR levels <= verbosity.  Set verbosity = 0 for no printing.
     #   (E.g. verbosity == 2 means print only on levels 1 and 2.)
-    clawdata.verbosity = 1
+    clawdata.verbosity = 0
     
 
     # --------------
