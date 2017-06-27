@@ -15,7 +15,7 @@ except:
     raise Exception("*** Must first set CLAW enviornment variable")
 
 bouss = True                # Dispersive terms ?
-B_param = 0.0 / 15.0        # Parameter for the Boussinesq eqns
+B_param = 1.0 / 15.0        # Parameter for the Boussinesq eqns
 use_bous_sw_thresh = False  # Use the switching threshold
 bous_sw_thresh = .8         # Threshold for the transition to SWE
 
