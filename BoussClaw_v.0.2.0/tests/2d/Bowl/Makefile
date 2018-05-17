@@ -12,7 +12,7 @@ CLAWMAKE = $(CLAW)/clawutil/src/Makefile.common
 # ----------------------------------
 
 CLAW_PKG = geoclaw                  # Clawpack package to use
-EXE = xgeoclaw                 # Executable to create
+EXE = xboussclaw                 # Executable to create
 SETRUN_FILE = setrun.py        # File containing function to make data
 OUTDIR = _output               # Directory for output
 SETPLOT_FILE = setplot.py      # File containing function to set plots
@@ -21,8 +21,7 @@ PLOTDIR = _plots               # Directory for plots
 # Environment variable FC should be set to fortran compiler, e.g. gfortran
 FC ?= gfortran   # default if not set as environment variable
 # Add any desired compiler flags such as -g here:
-mumpslib=/Users/jihwan/Research/MUMPS_4.10.0
-FFLAGS = -llapack -lblas -O2
+FFLAGS = -llapack -lblas
 
 
 # ---------------------------------
@@ -47,6 +46,7 @@ MODULES = \
  $(GEOLIB)/surge/stommel_storm_module.f90 \
  $(GEOLIB)/surge/constant_storm_module.f90 \
  $(GEOLIB)/surge/storm_module.f90 \
+ $(GEOLIB)/multilayer/multilayer_module.f90 \
  $(GEOLIB)/friction_module.f90 \
  $(BOUSSLIB)/qinit_module.f90 \
  $(BOUSSLIB)/bous_module.f90

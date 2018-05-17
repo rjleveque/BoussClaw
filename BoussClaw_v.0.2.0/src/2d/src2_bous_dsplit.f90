@@ -290,6 +290,12 @@
             endif
             
         enddo
+
+      if (.false.) then
+         ! for wall-reflecting BC at left: impose Q_0 = -Q_1
+         D(2) = D(2) - DL(1)   
+         DL(1) = 0.d0     
+         endif
              
       return
       end

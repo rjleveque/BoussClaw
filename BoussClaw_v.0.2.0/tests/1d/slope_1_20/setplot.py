@@ -3,10 +3,12 @@ Set up the plot figures, axes, and items to be done for each frame.
 This module is imported by the plotting routines and then the
 function setplot is called to set the plot parameters. 
 """ 
+from __future__ import absolute_import
+from __future__ import print_function
 try:
     from setplotfg import setplotfg
 except:
-    print "Did not find setplotfg.py"
+    print("Did not find setplotfg.py")
     setplotfg = None
     
 import os
@@ -18,7 +20,7 @@ if os.path.exists(fname):
 fout=open(fname,'w')
 
 #--------------------------
-def setplot(plotdata):
+def setplot(plotdata=None):
 #--------------------------
     
     """ 
@@ -30,6 +32,10 @@ def setplot(plotdata):
 
 
     from clawpack.visclaw import colormaps, geoplot
+
+    if plotdata is None:
+        from clawpack.visclaw.data import ClawPlotData
+        plotdata = ClawPlotData()
 
     plotdata.clearfigures()  # clear any old figures,axes,items data
 
@@ -67,8 +73,8 @@ def setplot(plotdata):
         topo = eta - h
         surface = ma.masked_where(h<=drytol, eta)
         depth = ma.masked_where(h<=drytol, h)
-	surface_or_depth =  where(topo<0, surface, depth)
-	return surface_or_depth
+        surface_or_depth =  where(topo<0, surface, depth)
+        return surface_or_depth
 
     def aa(current_data):
         from numpy import where,sqrt
@@ -84,7 +90,7 @@ def setplot(plotdata):
         t_energy=sum(dx*energy)
         fout=open(infile,'a')
         fout.write("%20.10e %20.10e \n" % (t, t_energy[0]))
-	return
+        return
 
     def aa_bous(current_data):
         import pylab
@@ -125,7 +131,7 @@ def setplot(plotdata):
         pylab.title('Surface at t = %4.2f' % t, fontsize=20)
         pylab.xticks(fontsize=15)
         pylab.yticks(fontsize=15)
-	return
+        return
 	
     #plotitem.plot_var = surface_or_depth
     plotitem.plot_var = geoplot.surface_or_depth
@@ -317,19 +323,27 @@ def setplot(plotdata):
     
     # Water Surface
     plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
-    plotitem.outdir = '../_output_sw_dx005'
     plotitem.map_2d_to_1d = x_slice
     plotitem.color = 'r'
     plotitem.plotstyle = '--'
     plotitem.kwargs = {'linewidth':1}
     
-    # Water Surface
-    plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
-    plotitem.outdir = '../_output_bous_dx005'
-    plotitem.map_2d_to_1d = x_slice
-    plotitem.color = 'b'
-    plotitem.plotstyle = '-'
-    plotitem.kwargs = {'linewidth':1}
+    if 0:
+        # Water Surface
+        plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+        plotitem.outdir = '../_output_sw_dx005'
+        plotitem.map_2d_to_1d = x_slice
+        plotitem.color = 'r'
+        plotitem.plotstyle = '--'
+        plotitem.kwargs = {'linewidth':1}
+        
+        # Water Surface
+        plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+        plotitem.outdir = '../_output_bous_dx005'
+        plotitem.map_2d_to_1d = x_slice
+        plotitem.color = 'b'
+        plotitem.plotstyle = '-'
+        plotitem.kwargs = {'linewidth':1}
     
     # Topography
     plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
@@ -386,35 +400,43 @@ def setplot(plotdata):
     
     # Water Surface
     plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
-    plotitem.outdir = '../_bouss/dx_10'
     plotitem.map_2d_to_1d = x_slice
     plotitem.color = 'c'
     plotitem.plotstyle = '-'
     plotitem.kwargs = {'linewidth':1}
     
-    # Water Surface
-    plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
-    plotitem.outdir = '../_bouss/dx_05'
-    plotitem.map_2d_to_1d = x_slice
-    plotitem.color = 'g'
-    plotitem.plotstyle = '-'
-    plotitem.kwargs = {'linewidth':1}
-
-    # Water Surface
-    plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
-    plotitem.outdir = '../_bouss/dx_02'
-    plotitem.map_2d_to_1d = x_slice
-    plotitem.color = 'r'
-    plotitem.plotstyle = '-'
-    plotitem.kwargs = {'linewidth':1}
-
-    # Water Surface
-    plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
-    plotitem.outdir = '../_bouss/dx_01'
-    plotitem.map_2d_to_1d = x_slice
-    plotitem.color = 'b'
-    plotitem.plotstyle = '-'
-    plotitem.kwargs = {'linewidth':1}
+    if 0:
+        # Water Surface
+        plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+        plotitem.outdir = '../_bouss/dx_10'
+        plotitem.map_2d_to_1d = x_slice
+        plotitem.color = 'c'
+        plotitem.plotstyle = '-'
+        plotitem.kwargs = {'linewidth':1}
+        
+        # Water Surface
+        plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+        plotitem.outdir = '../_bouss/dx_05'
+        plotitem.map_2d_to_1d = x_slice
+        plotitem.color = 'g'
+        plotitem.plotstyle = '-'
+        plotitem.kwargs = {'linewidth':1}
+    
+        # Water Surface
+        plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+        plotitem.outdir = '../_bouss/dx_02'
+        plotitem.map_2d_to_1d = x_slice
+        plotitem.color = 'r'
+        plotitem.plotstyle = '-'
+        plotitem.kwargs = {'linewidth':1}
+    
+        # Water Surface
+        plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+        plotitem.outdir = '../_bouss/dx_01'
+        plotitem.map_2d_to_1d = x_slice
+        plotitem.color = 'b'
+        plotitem.plotstyle = '-'
+        plotitem.kwargs = {'linewidth':1}
     
     # Topography
     plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
@@ -478,27 +500,35 @@ def setplot(plotdata):
     
     # Water Surface
     plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
-    plotitem.outdir = '../_output_sw_dx02'
     plotitem.map_2d_to_1d = x_slice
     plotitem.color = 'r'
     plotitem.plotstyle = ':'
     plotitem.kwargs = {'linewidth':1}
     
-    # Water Surface
-    plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
-    plotitem.outdir = '../_output_sw_dx01'
-    plotitem.map_2d_to_1d = x_slice
-    plotitem.color = 'g'
-    plotitem.plotstyle = '--'
-    plotitem.kwargs = {'linewidth':1}
-
-    # Water Surface
-    plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
-    plotitem.outdir = '../_output_sw_dx005'
-    plotitem.map_2d_to_1d = x_slice
-    plotitem.color = 'b'
-    plotitem.plotstyle = '-'
-    plotitem.kwargs = {'linewidth':1}
+    if 0:
+        # Water Surface
+        plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+        plotitem.outdir = '../_output_sw_dx02'
+        plotitem.map_2d_to_1d = x_slice
+        plotitem.color = 'r'
+        plotitem.plotstyle = ':'
+        plotitem.kwargs = {'linewidth':1}
+        
+        # Water Surface
+        plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+        plotitem.outdir = '../_output_sw_dx01'
+        plotitem.map_2d_to_1d = x_slice
+        plotitem.color = 'g'
+        plotitem.plotstyle = '--'
+        plotitem.kwargs = {'linewidth':1}
+    
+        # Water Surface
+        plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+        plotitem.outdir = '../_output_sw_dx005'
+        plotitem.map_2d_to_1d = x_slice
+        plotitem.color = 'b'
+        plotitem.plotstyle = '-'
+        plotitem.kwargs = {'linewidth':1}
     
     # Topography
     plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
@@ -532,28 +562,11 @@ def setplot(plotdata):
     plotaxes.title = 'Surface'
 
     # Plot surface as blue curve:
-    #plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    #plotitem.outdir='../_output_uni'
-    #plotitem.plot_var = 3
-    #plotitem.plotstyle = 'b-'
-    #plotitem.kwargs = {'linewidth':1}
-    
-    # Plot surface as blue curve:
     plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    plotitem.outdir='../_output'
     plotitem.plot_var = 3
     plotitem.plotstyle = 'r-'
     plotitem.kwargs = {'linewidth':1}
     
-    # Plot surface as blue curve:
-    #plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
-    #plotitem.outdir='../_output_amr'
-    #plotitem.plot_var = 3
-    #plotitem.plotstyle = 'b-'
-    #plotitem.kwargs = {'linewidth':1}
-
-    # Plot topo as green curve:
-    #plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
 
     def gaugetopo(current_data):
         q = current_data.q
